@@ -31,4 +31,5 @@
 	width:         10px;
 }
 	
-.ui-rotatable-handle.clone { visibility:  hidden; }
+.ui-rotatable-autohide .ui-rotatable-handle { display: none; }
+.ui-rotatable-handle.ui-draggable-dragging { display: none; }

@@ -19,10 +19,11 @@
     // Default Values
     var defaults = {
       rotatorClass: 'ui-rotatable-handle',
-      mtx: [1, 0, 0, 1]
+      mtx: [1, 0, 0, 1],
+      autoHide: true
     }, opts = $.extend(defaults, options),
       _this = this,
-      _rotator, center_coords;
+      _rotator, center_coords, dims;
 
     // Initialization 
     this.initialize = function () {
@@ -40,6 +41,19 @@
     this.createHandler = function () {
       _rotator = $('<div class="' + opts.rotatorClass + '"></div>');
       _this.append(_rotator);
+      _this.rotating = false;
+
+      if(opts.autoHide) {
+        $(_this).addClass('ui-rotatable-autohide')
+          .mouseenter(function() {
+            $(this).removeClass('ui-rotatable-autohide');
+          })
+          .mouseleave(function() {
+            if(!_this.rotating) {
+              $(this).addClass('ui-rotatable-autohide');
+            }
+          });
+      }
 
       this.bindRotation();
     };
@@ -66,12 +80,6 @@
           e.stopPropagation();
           e.stopImmediatePropagation();
 
-          // TL Corner Coords
-        //  tl_coords = {
-        //    'x': parseInt(_this.parent().css('left'), 10),
-        //    'y': parseInt(_this.parent().css('top'), 10)
-        //  };
-
           // Element Width & Height()
           dims = {
             'w': _this.width(),
@@ -90,6 +98,8 @@
           e.stopPropagation();
           e.stopImmediatePropagation();
 
+          _this.rotating = true;
+
           // Mouse Coords
           mouse_coords = {
             'x': e.pageX,
@@ -100,6 +110,9 @@
           if ($.browser.msie) { angle = -angle; }
 
           return _this.rotate(angle);
+        },
+        stop: function () {
+          _this.rotating = false;
         }
       });
     };
@@ -147,7 +160,6 @@
       for (i = 0; i < 4; i++) {
         m[i] = parseFloat(_m[i].replace('matrix(', ''));
       }
-
       return m;
     };
 
