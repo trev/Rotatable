@@ -1,5 +1,5 @@
 #draggable-zone {
-	background: #000 url(/images/space.jpg) 0 0 no-repeat;
+	background: #000 url(../images/space.jpg) 0 0 no-repeat;
 	border:     3px solid #000;
 	height:     500px;
 	margin:     2em auto;
