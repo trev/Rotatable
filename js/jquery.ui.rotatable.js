@@ -14,6 +14,8 @@
 (function ($) {
   'use strict';
 
+  var _IE_ = /msie [\w.]+/.exec(navigator.userAgent.toLowerCase());
+  
   $.fn.rotatable = function (options) {
 
     // Default Values
@@ -62,7 +64,7 @@
     this.bindRotation = function () {
 
       // IE Fix
-      if ($.browser.msie) {
+      if (_IE_) {
         _rotator.mousedown(function (e) {
           e.stopPropagation();
         });
@@ -107,7 +109,7 @@
           };
 
           angle = _this.radToDeg(_this.getAngle(mouse_coords, center_coords)) - 90;
-          if ($.browser.msie) { angle = -angle; }
+          if (_IE_) { angle = -angle; }
 
           return _this.rotate(angle);
         },
@@ -179,7 +181,7 @@
       });
 
       // IE Fix
-      if ($.browser.msie) {
+      if (_IE_) {
         var coef = dims.w / dims.h,
           _height = _this.parent().parent().height(),
           _width = coef * _height,
