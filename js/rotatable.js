@@ -1,14 +1,13 @@
 /*!
  * jQuery Element Rotation Plugin
- *
+3*
  * Requires jQueryUI 
  *
- * Copyright (c) 2010 Pavel Markovnin
+ * Copyright (c) 2010 Pavel Markovnin @ vremenno.net
  * Dual licensed under the MIT and GPL licenses.
  *
- * Extended by Trevor Wistaff
+ * Extended by Trevor Wistaff @ a07.com.au
  *
- * http://vremenno.net
  */
 
 (function ($) {
@@ -18,7 +17,7 @@
 
     // Default Values
     var defaults = {
-      rotatorClass: 'ui-rotatable-handle',
+      rotatorClass: 'rotatable-handle',
       mtx: [1, 0, 0, 1],
       autoHide: true
     }, opts = $.extend(defaults, options),
@@ -44,13 +43,13 @@
       _this.rotating = false;
 
       if(opts.autoHide) {
-        $(_this).addClass('ui-rotatable-autohide')
+        $(_this).addClass('rotatable-autohide')
           .mouseenter(function() {
-            $(this).removeClass('ui-rotatable-autohide');
+            $(this).removeClass('rotatable-autohide');
           })
           .mouseleave(function() {
             if(!_this.rotating) {
-              $(this).addClass('ui-rotatable-autohide');
+              $(this).addClass('rotatable-autohide');
             }
           });
       }
@@ -61,19 +60,7 @@
     // Bind Rotation to Handler
     this.bindRotation = function () {
 
-      // IE Fix
-      if ($.browser.msie) {
-        _rotator.mousedown(function (e) {
-          e.stopPropagation();
-        });
-
-        _rotator.mouseup(function (e) {
-          e.stopPropagation();
-        });
-      }
-
       _rotator.draggable({
-        handle: _rotator,
         helper: 'clone',
         revert: false,
         start: function (e) {
@@ -107,7 +94,6 @@
           };
 
           angle = _this.radToDeg(_this.getAngle(mouse_coords, center_coords)) - 90;
-          if ($.browser.msie) { angle = -angle; }
 
           return _this.rotate(angle);
         },
@@ -165,8 +151,7 @@
 
     // Update CSS Transform Matrix (transform: matrix)
     this.updateRotationMatrix = function (m) {
-      var matrix = 'matrix(' + m[0] + ', ' + m[1] + ', ' + m[2] + ', ' + m[3] + ', 0, 0)',
-        ie_matrix = "progid:DXImageTransform.Microsoft.Matrix(M11='" + m[0] + "', M12='" + m[1] + "', M21='" + m[2] + "', M22='" + m[3] + "', sizingMethod='auto expand')";
+      var matrix = 'matrix(' + m[0] + ', ' + m[1] + ', ' + m[2] + ', ' + m[3] + ', 0, 0)'
 
       _this.css({
         '-moz-transform': matrix,
@@ -174,27 +159,7 @@
         '-webkit-transform': matrix,
         '-ms-transform': matrix,
         'transform': matrix,
-        'filter': ie_matrix,
-        '-ms-filter': '"' + ie_matrix + '"'
       });
-
-      // IE Fix
-      if ($.browser.msie) {
-        var coef = dims.w / dims.h,
-          _height = _this.parent().parent().height(),
-          _width = coef * _height,
-          _top = (dims.h - _height) / 2,
-          _left = (dims.w - _width) / 2;
-
-        _this.parent().parent().css({
-          'width': _width
-        });
-
-        _this.parent().css({
-          'left': _left,
-          'top': _top
-        });
-      }
     };
 
     return this.initialize();

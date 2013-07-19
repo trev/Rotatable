@@ -15,7 +15,7 @@
 	z-index:    2;
 }
 	
-.ui-rotatable-handle {
+.rotatable-handle {
 	background:    #f5dc58;
 	border:        1px solid #FFF;
 	border-radius: 5px;
@@ -24,12 +24,17 @@
   -webkit-border-radius: 5px;
 	cursor:        pointer;
 	height:        10px;
+	width:         10px;
 	left:          50%;
 	margin:        0 0 0 -5px;
 	position:      absolute;
 	top:           -5px;
-	width:         10px;
+}
+
+.ui-resizable-handle { 
+  width: 10px;
+  height: 10px;
 }
 	
-.ui-rotatable-autohide .ui-rotatable-handle { display: none; }
-.ui-rotatable-handle.ui-draggable-dragging { display: none; }
+.rotatable-autohide .rotatable-handle { display: none; }
+.rotatable-handle.ui-draggable-dragging { display: none; }

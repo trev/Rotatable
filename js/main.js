@@ -1,4 +1,6 @@
-$(document).ready(function() {
+$(function() {
+
+  // Sample usage
   var drWr = $('#draggable-wrapper'),
       rsWr = $('#resizable-wrapper'),
       elem = $('#elem-wrapper');
@@ -10,5 +12,8 @@ $(document).ready(function() {
   
   drWr.draggable();
   
-  elem.parent().rotatable();
+  elem.parent().rotatable({
+    autoHide: false
+  });
+
 });
