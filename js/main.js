@@ -1,9 +1,9 @@
 $(function() {
 
   // Sample usage
-  var drWr = $('#draggable-wrapper'),
-      rsWr = $('#resizable-wrapper'),
-      elem = $('#elem-wrapper');
+  var drWr = $('.draggable-wrapper'),
+      rsWr = $('.resizable-wrapper'),
+      elem = $('.elem-wrapper');
   
   elem.resizable({
     aspectRatio: true,
@@ -12,8 +12,10 @@ $(function() {
   
   drWr.draggable();
   
-  elem.parent().rotatable({
-    autoHide: false
-  });
+  elem.each(function(){
+    $(this).parent().rotatable({
+      autoHide: false
+    });
+  })
 
 });

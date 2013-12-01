@@ -1,14 +1,23 @@
-#draggable-zone {
+.draggable-zone {
 	background: #000 url(../images/space.jpg) 0 0 no-repeat;
-	border:     3px solid #000;
-	height:     500px;
-	margin:     2em auto;
+	background-size: cover;
 	overflow:   hidden;
-	width:      600px;
+	position: absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
 }
-	
+
+
 .ui-wrapper { overflow:   visible !important; }
 	
+.draggable-wrapper{
+	position: absolute;
+	height: auto;
+	width: auto;
+}
+
 .ui-resizable-handle {
 	background:    #f5dc58;
 	border:        1px solid #FFF;
